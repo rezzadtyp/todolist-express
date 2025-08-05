@@ -37,6 +37,16 @@ export class TodoService {
     return result;
   }
 
+  public getTodoById(id: number) {
+    const todo = this.todos.find((todo: ITodo) => todo.id === id);
+
+    if (!todo) {
+      throw new Error("Todo not found");
+    }
+
+    return todo;
+  }
+
   public createTodo(body: { title: string; description: string }) {
     const newTodo: ITodo = {
       id: this.idCounter++,
@@ -72,5 +82,17 @@ export class TodoService {
 
     // return todo yang sudah diupdate
     return this.todos[todoIndex];
+  }
+
+  public deleteTodo(id: number) {
+    const todoIndex = this.todos.findIndex((todo: ITodo) => todo.id === id);
+
+    if (todoIndex === -1) {
+      throw new Error("Todo not found");
+    }
+
+    this.todos.splice(todoIndex, 1);
+
+    return this.todos;
   }
 }

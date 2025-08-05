@@ -16,6 +16,10 @@ export class TodoRoutes {
       "/",
       this.todoController.getAllTodos.bind(this.todoController)
     );
+    this.router.get(
+      "/:id",
+      this.todoController.getTodoById.bind(this.todoController)
+    );
     this.router.post(
       "/",
       this.todoController.createTodo.bind(this.todoController)
@@ -23,6 +27,10 @@ export class TodoRoutes {
     this.router.put(
       "/:id",
       this.todoController.updateTodo.bind(this.todoController)
+    );
+    this.router.delete(
+      "/:id",
+      this.todoController.deleteTodo.bind(this.todoController)
     );
   }
 

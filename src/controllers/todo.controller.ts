@@ -61,4 +61,43 @@ export class TodoController {
       });
     }
   }
+
+  public async deleteTodo(req: Request, res: Response): Promise<void> {
+    try {
+      const id = Number(req.params.id);
+      const result = await this.todoService.deleteTodo(id);
+
+      if (result) {
+        res.status(200).send({
+          message: "Todo deleted successfully",
+        });
+      } else {
+        res.status(500).send({
+          message: "Error deleting todo",
+        });
+      }
+    } catch (error) {
+      res.status(500).send({
+        message: "Internal server error",
+        error: error,
+      });
+    }
+  }
+
+  public async getTodoById(req: Request, res: Response): Promise<void> {
+    try {
+      const id = Number(req.params.id);
+      const result = await this.todoService.getTodoById(id);
+
+      res.status(200).send({
+        message: "Todo fetched successfully",
+        data: result,
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: "Internal server error",
+        error: error,
+      });
+    }
+  }
 }
